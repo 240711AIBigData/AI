@@ -113,6 +113,11 @@
 
 <br>
 
+### 4. 새 파일 생성
+|-|
+|-|
+|![image](https://github.com/user-attachments/assets/30bd2424-1b0c-4989-bb95-20e0c432198d)|
 
+<br>
 
 
