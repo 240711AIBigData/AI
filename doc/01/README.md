@@ -88,6 +88,31 @@
 |![image](https://github.com/user-attachments/assets/64e68426-d514-4e9a-b9c9-f740363f1cf8)|
 |![image](https://github.com/user-attachments/assets/0fa81636-51e6-4791-bc46-094034789eef)|
 
+<br>
+
+### 3. 새 프로젝트 생성
+> 아나콘다 사용 → interpreter type : Base conda 설정
+
+|-|
+|-|
+|![image](https://github.com/user-attachments/assets/aeb3a689-44b9-4a54-a526-f6d34ab49530)|
 
 <br>
+
+### 4. 환경설정
+|-|
+|-|
+|![image](https://github.com/user-attachments/assets/76537b70-b1a0-46f0-b4b0-57c3340db03a)|
+|마우스휠로 폰트사이즈 조절 : Editor > General > Change font size with Ctrl+Mouse Wheel in 체크|
+|![image](https://github.com/user-attachments/assets/e955da8f-81d4-4fbf-8536-0b686eee93a9)|
+|수정되었을때마다 알림창 노출(자동저장이 기본옵션이라 금방 사라짐)|
+|![image](https://github.com/user-attachments/assets/7da625ca-24fa-49e4-8f5c-37599b64dce7)|
+|인터프리터(번역기) 설정|
+|![image](https://github.com/user-attachments/assets/9c2f8767-e4d9-4c36-8e32-31dbc29013cb)|
+|![image](https://github.com/user-attachments/assets/afd2f793-0750-4999-b9bf-6db745934738)|
+
+<br>
+
+
+
 
