@@ -329,12 +329,87 @@ pandas 함수 조합하기
 
 <br>
 
+# 데이터 합치기
+df.merge() : 가로로 합치기
+---
+|-|
+|-|
+|![image](https://github.com/user-attachments/assets/16d14840-e73d-4a92-8223-be42369ad0b1)|
 
+<br>
 
+df.concat() : 세로로 합치기
+---
+|-|
+|-|
+|![image](https://github.com/user-attachments/assets/787f6653-61d3-4ea0-bd03-6bfcf4117fcd)|
 
+<br>
 
+### 가로로 합치기
+- pd.merge()에 결합할 데이터 프레임명 나열
 
+- how  = 'left': 오른쪽에 입력한 데이터 프레임을 왼쪽 데이터 프레임에 결합
 
+- on: 데이터를 합칠 때 기준으로 삼을 변수명 입력
 
+```
+  # 중간고사 데이터 만들기
+  test1 = pd.DataFrame({'id'      : [1, 2, 3, 4, 5],
+                        'midterm' : [60, 80, 70, 90, 85]})
+  
+  # 기말고사 데이터 만들기
+  test2 = pd.DataFrame({'id'    : [1, 2, 3, 4, 5],
+                        'final' : [70, 83, 65, 95, 80]})
 
+  # id 기준으로 합쳐서 total에 할당
+  total = pd.merge(test1, test2, how = 'left', on = 'id')
+  total
+```
+
+<br>
+
+> 다른 데이터를 활용해 변수 추가하기
+```
+  name = pd.DataFrame({'nclass'  : [1, 2, 3, 4, 5],
+                       'teacher' : ['kim', 'lee', 'park', 'choi', 'jung']})
+
+  # nclass 기준으로 합쳐서 exam_new에 할당
+  exam_new = pd.merge(exam, name, how = 'left', on = 'nclass')
+  exam_new
+```
+
+<br>
+
+### 세로로 합치기
+- 결합할 데이터 프레임명을 []를 이용해 나열
+  
+- 인덱스 중복 안되도록 새로 부여하려면 pd.concat()에 ignore_index = True
+
+```
+  # 학생 1~5번 시험 데이터 만들기
+  group_a = pd.DataFrame({'id'   : [1, 2, 3, 4, 5],
+                          'test' : [60, 80, 70, 90, 85]})
+  
+  # 학생 6~10번 시험 데이터 만들기
+  group_b = pd.DataFrame({'id'   : [6, 7, 8, 9, 10],
+                          'test' : [70, 83, 65, 95, 80]})
+  
+  # 데이터 합쳐서 group_all에 할당
+  group_all = pd.concat([group_a, group_b])
+  group_all
+```
+
+<br>
+
+📌 pandas 더 알아보기
+- 치트 시트(cheat sheet) : 패키지 사용법을 요약한 매뉴얼
+
+  - [Pandas Cheat Sheet](bit.ly/easypy_pandas)
+
+- pandas 공식 문서 검색하기
+
+  - [Pandas Documentation](pandas.pydata.org/docs)
+ 
+<br>
 
