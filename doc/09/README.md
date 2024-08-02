@@ -82,3 +82,82 @@ df.loc[]와 df.iloc[]의 차이점
 |연속된 행 추출 x:y|이상:이하|이상:미만|
 
 <br>
+
+# 요약
+## 1. 조건에 맞는 데이터만 추출하기
+```
+  exam.query('english <= 80')
+  exam.query('nclass == 1 & math >= 50')    # 여러 조건 동시 충족
+  exam.query('math >= 90 | english >= 90')  # 여러 조건 중 하나 이상 충족
+  exam.query('nclass in [1, 3, 5]')
+```
+
+<br>
+
+## 2. 필요한 변수만 추출하기
+```
+  exam['math']                              # 한 변수 추출
+  exam[['nclass', 'math', 'english']]       # 여러 변수 추출
+  exam.drop(columns = 'math')               # 변수 제거
+  exam.drop(columns = ['math', 'english'])  # 여러 변수 제거
+```
+
+<br>
+
+## 3. pandas 명령어 조합하기
+```
+  exam.query('math >= 50')[['id', 'math']].head()
+```
+
+<br>
+
+## 4. 순서대로 정렬하기
+```
+  exam.sort_values('math')                     # 오름차순 정렬
+  exam.sort_values('math', ascending = False)  # 내림차순 정렬
+  
+  # 여러 변수 기준 정렬
+  exam.sort_values(['nclass', 'math'], ascending = [True, False])
+```
+
+
+<br>
+
+## 5. 파생변수 추가하기
+```
+  exam.assign(total = exam['math'] + exam['english'] + exam['science'])
+  
+  # 여러 파생변수 한 번에 추가하기
+  exam.assign(total = exam['math'] + exam['english'] + exam['science'],
+              mean = (exam['math'] + exam['english'] + exam['science']) / 3)
+  
+  # assign()에 np.where() 적용하기
+  exam.assign(test = np.where(exam['science'] >= 60, 'pass', 'fall'))
+  
+  # 추가한 변수를 pandas 코드에 바로 활용하기
+  exam.assign(total = exam['math'] + exam['english'] + exam['science']) \
+      .sort_values('total') \
+      .head()
+```
+
+<br>
+
+## 6. 집단별로 요약하기
+```
+  exam.groupby('nclass') \
+      .agg(mean_math = ('math', 'mean'))
+  
+  # 각 집단별로 다시 집단 나누기
+  mpg.groupby(['manufacturer', 'drv']) \
+     .agg(mean_cty = ('cty', 'mean'))
+```
+
+<br>
+
+## 7. 데이터 합치기
+```
+  pd.merge(test1, test2, how = 'left', on = 'id')  # 가로로 합치기
+  pd.concat([group_a, group_b])                    # 세로로 합치기
+```
+
+<Br>
