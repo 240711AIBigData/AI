@@ -7,8 +7,6 @@ df[] : 변수 추출하기
 
 <br>
 
-변수 추출하기
----
 > 변수 추출하기
 ```
   exam['math']  # math 추출
@@ -25,7 +23,7 @@ df[] : 변수 추출하기
 
 <br>
 
-### 📌 변수가 1개일 때 데이터 프레임 유지하기
+#### 📌 변수가 1개일 때 데이터 프레임 유지하기
 - 변수명을 []로 한번 더 감싸기
 
 > 시리즈로 추출
@@ -40,8 +38,7 @@ df[] : 변수 추출하기
 
 <br>
 
-변수 제거하기
----
+### 변수 제거하기
 > 변수 제거하기
 ```
   exam.drop(columns = 'math')  # math 제거
@@ -51,9 +48,8 @@ df[] : 변수 추출하기
 
 <br>
 
-pandas 함수 조합하기
----
-### query()와 [] 조합하기
+### pandas 함수 조합하기
+#### query()와 [] 조합하기
 > 1반 학생의 영어 점수 추출
 ```
   # nclass가 1인 행만 추출한 다음 english 추출
@@ -81,8 +77,7 @@ pandas 함수 조합하기
 
 <br>
 
-가독성 있게 코드 줄 바꾸기
----
+### 가독성 있게 코드 줄 바꾸기
 - 명령어 끝난 부분 뒤에 백슬래시(\) 입력 후 enter 로 줄바꿈
 
 - Spacebar 나 Tab 을 이용해 간격 띄우고 다음 명령어 입력
@@ -100,17 +95,60 @@ pandas 함수 조합하기
 
 <br>
 
-# 파생변수 추가하기
-df.assign() : 파생변수 추가하기
+순서대로 정렬하기
 ---
+### 순서대로 정렬하기 : df.sort_values()
 |-|
 |-|
-|![image](https://github.com/user-attachments/assets/f78239c9-5ebc-430b-9a59-6a8218ff04a8)|
+|![image](https://github.com/user-attachments/assets/739c7617-8ba8-46c5-bcda-3a024c05c7ad)|
+
+
+<br>
+
+### 오름차순으로 정렬하기
+```
+  exam.sort_values('math')  # math 오름차순 정렬
+```
+
+<br>
+
+### 내림차순으로 정렬하기
+```
+  exam.sort_values('math', ascending = False)  # math 내림차순 정렬
+```
+
+<br>
+
+### 여러 정렬 기준 적용하기
+```
+  # nclass, math 오름차순 정렬
+  exam.sort_values(['nclass', 'math'])
+```
+
+<br>
+
+> 변수별로 정렬 순서를 다르게 지정하기
+```
+  # nclass 오름차순, math 내림차순 정렬
+  exam.sort_values(['nclass', 'math'], ascending = [True, False])
+```
+
+<br>
+
+---
 
 <br>
 
 파생변수 추가하기
 ---
+### 파생변수 추가하기 : df.assign()
+|-|
+|-|
+|![image](https://github.com/user-attachments/assets/bfaab04f-0e34-442c-95dd-c97845aabd5e)|
+
+
+<br>
+
 > 파생변수 추가
 ```
   # total 변수 추가
@@ -128,7 +166,7 @@ df.assign() : 파생변수 추가하기
 
 <br>
 
-> df.assign()에 np.where() 적용하기
+### df.assign()에 np.where() 적용하기
 ```
   import numpy as np
   exam.assign(test = np.where(exam['science'] >= 60, 'pass', 'fall'))
@@ -136,7 +174,7 @@ df.assign() : 파생변수 추가하기
 
 <br>
 
-> 추가한 변수를 pandas 함수에 바로 활용하기
+### 추가한 변수를 pandas 함수에 바로 활용하기
 ```
   # total 변수 추가, total 기준 정렬
   exam.assign(total = exam['math'] + exam['english'] + exam['science'])\
@@ -145,7 +183,7 @@ df.assign() : 파생변수 추가하기
 
 <br>
 
-> lambda 이용해 데이터 프레임명 줄여쓰기
+### lambda 이용해 데이터 프레임명 줄여쓰기
 ```
   # 긴 데이터 프레임명 지정
   long_name = pd.read_csv('./input/exam.scv')
@@ -159,7 +197,7 @@ df.assign() : 파생변수 추가하기
 
 <br>
 
-> 앞에서 만든 변수를 활용해 다시 변수 만들기
+### 앞에서 만든 변수를 활용해 다시 변수 만들기
 ```
   # 반드시 lambda 를 이용해 데이터 프레임명을 약어로 입력
   exam.assign(total = exam['math'] + exam['english'] + exam['science'],
@@ -189,16 +227,15 @@ df.assign() : 파생변수 추가하기
 
 <br>
 
-df.groupby(), df.agg() : 집단별로 요약하기
+집단별로 요약하기
 ---
+### 집단별로 요약하기 : df.groupby(), df.agg() 
 |-|
 |-|
 |![image](https://github.com/user-attachments/assets/97e00852-34df-49c5-96c2-fe8012451df2)|
 
 <br>
 
-집단별로 요약하기
----
 > 전체 요약 통계량 구하기
 ```
   # math 평균 구하기
@@ -244,8 +281,7 @@ df.groupby(), df.agg() : 집단별로 요약하기
 
 <br>
 
-agg()에 자주 사용하는 요약 통계량 함수
----
+### agg()에 자주 사용하는 요약 통계량 함수
 |함수|통계량|
 |-|-|
 |mean()|평균|
@@ -268,8 +304,7 @@ agg()에 자주 사용하는 요약 통계량 함수
 
 <br>
 
-집단별로 다시 집단 나누기
----
+### 집단별로 다시 집단 나누기
 > 집단을 나눈 다음 다시 하위 집단으로 나누기
 ```
   mpg.groupby(['manufacturer', 'drv'])\   # 제조 회사 및 구동 방식별 분리
@@ -302,8 +337,7 @@ agg()에 자주 사용하는 요약 통계량 함수
 
 <br>
 
-pandas 함수 조합하기
----
+### pandas 함수 조합하기
 - 제조 회사별로 'suv' 자동차의 도시 및 고속도로 합산 연비 평균을 구해 내림차순으로 정렬하고, 1~5위까지 출력
 > 함수 사용 절차
 
@@ -326,6 +360,10 @@ pandas 함수 조합하기
      .sort_values('mean_tot', ascending = False) \        # 내림차순 정렬
      .head()                                              # 1~5위까지 출력
 ```
+
+<br>
+
+---
 
 <br>
 
