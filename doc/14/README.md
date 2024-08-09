@@ -118,6 +118,10 @@
 
 <br>
 
+---
+
+<br>
+
 성별에 따른 월급 차이
 ---
 ### 성별 변수 검토 및 전처리하기
@@ -208,6 +212,10 @@
 
 <br>
 
+---
+
+<br>
+
 나이와 월급의 관계
 ---
 ### 나이 변수 검토 및 전처리하기
@@ -271,6 +279,10 @@
 
 <br>
 
+---
+
+<br>
+
 연력대에 따른 월급 차이
 ---
 ### 연령대 변수 검토 및 전처리하기
@@ -316,6 +328,10 @@ ageg_income
   sns.barplot(data = ageg_income, x = 'ageg', y = 'mean_income',
               order = ['young', 'middle', 'old'])
 ```
+
+<br>
+
+---
 
 <br>
 
@@ -432,6 +448,10 @@ sex_income
 
 <br>
 
+---
+
+<br>
+
 성별 직업 빈도
 ---
 ### 성별 직업 빈도 분석하기
@@ -468,6 +488,10 @@ sex_income
 # 여성 직업 빈도 막대 그래프 만들기
 sns.barplot(data = job_female, y = 'job', x = 'n').set(xlim = [0, 500])
 ```
+
+<br>
+
+---
 
 <br>
 
@@ -618,6 +642,10 @@ sns.barplot(data = job_female, y = 'job', x = 'n').set(xlim = [0, 500])
   # 막대 그래프 만들기
   sns.barplot(data = age_rel_div, x = 'ageg', y = 'proportion', hue = 'religion')
 ```
+
+<br>
+
+---
 
 <br>
 
