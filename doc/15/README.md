@@ -1,4 +1,11 @@
 # 텍스트 마이닝
+
+|-|
+|-|
+|![image](https://github.com/user-attachments/assets/15153e3d-96a7-4c22-a236-f105aa31ec7e)|
+
+<br>
+
 대통령 연설문 텍스트 마이님
 ---
 ### 형태소 분석(morphology analysis)
