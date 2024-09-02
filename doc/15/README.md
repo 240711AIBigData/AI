@@ -41,7 +41,7 @@
 <br>
 
 #### 2. KoNLPy 의존성 패키지 설치하기
-```
+```Python
   pip install jpype1
 ```
 - 의존성 패키지 : 패키지가 의존하는 패키지
@@ -53,7 +53,7 @@
 <br>
 
 #### 3. KoNLPy 설치하기
-```
+```Python
   pip install konlpy
 ```
 
@@ -65,7 +65,7 @@
 
 - encoding = 'UTF-8' : 불러올 텍스트 파일의 인코딩을 'UTF-8'로 지정
 
-```
+```Python
   moon = open('speech_moon.txt', encoding = 'UTF-8').read()
   moon
 ```
@@ -79,7 +79,7 @@
 
 - [^가-힣] : '한글이 아닌 모든 문자'를 의미하는 정규 표현식(regular expression)
 
-```
+```Python
   # 불필요한 문자 제거하기
   import re
   moon = re.sub('[^가-힣]', ' ', moon)
@@ -91,7 +91,7 @@
 #### 3. 명사 추출하기
 - 명사를 보면 텍스트가 무엇에 관한 내용인지 파악 가능
 
-```
+```Python
   # hannanum 만들기
   import konlpy
   hannanum = konlpy.tag.Hannanum()
@@ -99,7 +99,7 @@
   # 명사 추출하기
   hannanum.nouns("대한민국의 영토는 한반도와 그 부속도서로 한다")
 ```
-```
+```Python
   # 연설문에서 명사 추출하기
   nouns = hannanum.nouns(moon)
   nouns
@@ -108,7 +108,7 @@
 <br>
 
 ##### 📌 리스트를 다루기 쉽게 데이터 프레임으로 변환하기
-```
+```Python
   # 데이터 프레임으로 변환
   import pandas as pd
   df_word = pd.DataFrame({'word' : nouns})
@@ -120,17 +120,17 @@
 #### 4. 단어 빈도표 만들기
 - str.len() : 글자 수 세기
 
-```
+```Python
   # 글자 수 추가
   df_word['count'] = df_word['word'].str.len()
   df_word
 ```
-```
+```Python
   # 두 글자 이상 단어만 남기기
   df_word = df_word.query('count >= 2')
   df_word.sort_values('count')
 ```
-```
+```Python
   # 단어 빈도 구하기
   df_word = df_word.groupby('word', as_index = False) \  # 단어 별 분리
                    .agg(n = ('word', 'count')) \         # 빈도 구하기
@@ -141,12 +141,12 @@
 <br>
 
 #### 5. 단어 빈도 막대 그래프 만들기
-```
+```Python
   # 단어 빈도 상위 20개 추출
   top20 = df_word.head(20)
   top20
 ```
-```
+```Python
   import seaborn as sns
   import matplotlib.pyplot as plt
   
@@ -169,7 +169,7 @@
 <br>
 
 #### 1. wordcloud 패키지 설치하기
-```
+```Python
   pip install wordcloud
 ```
 
@@ -177,7 +177,7 @@
 
 ##### 💡 wordcloud 패키지 설치 오류 해결하기
 > wordcloud 패키지 설치 중 다음 에러 메시지가 출력되면 'Microsoft Visual C++' 설치
-```
+```Python
   error: Microsoft Visual C++ 14.0 or greater is required. Get it with “Microsoft C++ Build Tools”
 ```
 - (1) [여기](bit.ly/easypy_103)에서 왼쪽 위 [Build Tools 다운로드] 버튼 클릭해 설치 파일 다운로드
@@ -191,7 +191,7 @@
 <br>
 
 #### 2. 한글 폰트 설정하기
-```
+```Python
   font = 'DoHyeon-Regular.ttf'
 ```
 
@@ -199,7 +199,7 @@
 
 #### 3. 단어와 빈도를 담은 딕셔너리 만들기
 > 단어는 키(key), 빈도는 값(value)으로 구성된 딕셔너리 만들기
-```
+```Python
   # 데이터 프레임을 딕셔너리로 변환
   dic_word = df_word.set_index('word').to_dict()['n']
   dic_word
@@ -208,7 +208,7 @@
 <br>
 
 #### 4. 워드 클라우드 만들기
-```
+```Python
   # wc 만들기
   from wordcloud import WordCloud
   wc = WordCloud(random_state = 1234,         # 난수 고정
@@ -217,7 +217,7 @@
                  height = 400,                # 세로 크기
                  background_color = 'white')  # 배경색
 ```
-```
+```Python
   # 워드 클라우드 만들기
   img_wordcloud = wc.generate_from_frequencies(dic_word);
   
@@ -247,7 +247,7 @@
 ### 워드 클라우드 모양 바꾸기
 #### 1. mask 만들기
 > 이미지 파일 불러오기
-```
+```Python
   import PIL  
   icon = PIL.Image.open('cloud.png')
 ```
@@ -255,7 +255,7 @@
 <br>
 
 > mask 만들기
-```
+```Python
   import numpy as np
   img = PIL.Image.new('RGB', icon.size, (255, 255, 255))
   img.paste(icon, icon)
@@ -267,7 +267,7 @@
 #### 2. 워드 클라우드 만들기
 - mask = img : mask 적용하기
 
-```
+```Python
   # wc 만들기
   wc = WordCloud(random_state = 1234,         # 난수 고정
                  font_path = font,            # 폰트 설정
@@ -276,7 +276,7 @@
                  background_color = 'white',  # 배경색
                  mask = img)                  # mask 설정
 ```
-```
+```Python
   # 워드 클라우드 만들기
   img_wordcloud = wc.generate_from_frequencies(dic_word);
   
@@ -293,7 +293,7 @@
 
 - 컬러맵(colormaps) : 색깔 목록
 
-```
+```Python
   # wc 만들기
   wc = WordCloud(random_state = 1234,         # 난수 고정
                  font_path = font,            # 폰트 설정
@@ -303,7 +303,7 @@
                  mask = img,                  # mask 설정
                  colormap = 'inferno')        # 컬러맵 설정
 ```
-```
+```Python
   # 워드 클라우드 만들기
   img_wordcloud = wc.generate_from_frequencies(dic_word);
   
@@ -349,7 +349,7 @@
 
   - 방탄소년단 '빌보드 핫 100 차트' 1위 소식을 다룬 네이버 뉴스 기사 댓글
 
-```
+```Python
   # 데이터 불러오기
   df = pd.read_csv('news_comment_BTS.csv', encoding = 'UTF-8')
   
@@ -362,7 +362,7 @@
 #### 2. 불필요한 문자 제거하기
 - reply 는 데이터 프레임에 담겨 있는 변수이므로 str.replace() 를 사용해 불필요 문자 제거
 
-```
+```Python
   # 불필요한 문자 제거하기
   df['reply'] = df['reply'].str.replace('[^가-힣]', ' ', regex = True)
   df['reply'].head()
@@ -377,7 +377,7 @@
  
   - 댓글처럼 정제되지 않은 텍스트 분석에 적합
  
-```
+```Python
   # kkma 만들기
   import konlpy
   kkma = konlpy.tag.Kkma()
@@ -392,7 +392,7 @@
 
 - 함수가 각 행의 값을 따로따로 처리하도록 apply() 사용
 
-```
+```Python
   # 명사 추출 - apply() 활용
   nouns = df['reply'].apply(kkma.nouns)
   nouns
@@ -405,12 +405,12 @@
 
 - df.explode() 를 이용해 한 행에 한 단어만 들어가도록 변경
 
-```
+```Python
   # 한 행에 한 단어가 들어가도록 구성
   nouns = nouns.explode()
   nouns
 ```
-```
+```Python
   # 데이터 프레임 만들기
   df_word = pd.DataFrame({'word' : nouns})
   
@@ -421,7 +421,7 @@
   df_word = df_word.query('count >= 2')
   df_word
 ```
-```
+```Python
   # 빈도표 만들기
   df_word = df_word.groupby('word', as_index = False) \  # 단어 별 분리
                    .agg(n = ('word', 'count')) \         # 빈도 구하기
@@ -432,12 +432,12 @@
 <br>
 
 #### 5. 단어 빈도 막대 그래프 만들기
-```
+```Python
 # 단어 빈도 상위 20개 추출
 top20 = df_word.head(20)
 top20
 ```
-```
+```Python
   # 가로 세로 크기 설정
   plt.rcParams.update({'figure.figsize': [6.5, 6]})
   
@@ -448,7 +448,7 @@ top20
 <br>
 
 ### 워드 클라우드 만들기
-```
+```Python
   # 데이터 프레임을 딕셔너리로 변환
   dic_word = df_word.set_index('word').to_dict()['n']
   
@@ -460,7 +460,7 @@ top20
                  background_color = 'white',  # 배경색
                  mask = img)                  # mask 설정
 ```
-```
+```Python
   # 워드 클라우드 만들기
   img_wordcloud = wc.generate_from_frequencies(dic_word)
   
