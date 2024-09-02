@@ -71,11 +71,11 @@ t 검정(t-test) - 두 집단의 평균 비교하기
 
 ### compact 자동차와 suv 자동차의 도시 연비 t 검정
 #### 기술 통계 분석
-```
+```Python
   import pandas as pd
   mpg = pd.read_csv('mpg.csv')
 ```
-```
+```Python
   ## 기술 통계 분석
   
   # compact, suv 추출하기
@@ -109,7 +109,7 @@ t 검정(t-test) - 두 집단의 평균 비교하기
    
   - p-value 가 0.05 보다 작기 때문에 'compact와 suv 간 평균 도시 연비 차이가 통계적으로 유의하다' 고 결론
 
-```
+```Python
   compact = mpg.query('category == "compact"')['cty']
   suv = mpg.query('category == "suv"')['cty']
   
@@ -122,7 +122,7 @@ t 검정(t-test) - 두 집단의 평균 비교하기
 
 ### 일반 휘발유와 고급 휘발유의 도시 연비 t 검정
 #### 기술 통계 분석
-```
+```Python
   ## 기술 통계 분석
   
   # r, p 추출하기
@@ -138,7 +138,7 @@ t 검정(t-test) - 두 집단의 평균 비교하기
 <br>
 
 #### t 검정
-```
+```Python
   regular = mpg.query('fl == "r"')['cty']
   premium = mpg.query('fl == "p"')['cty']
   
@@ -175,7 +175,7 @@ t 검정(t-test) - 두 집단의 평균 비교하기
 
 ### 실업자 수와 개인 소비 지출의 상관관계
 #### 1. 상관계수 구하기
-```
+```Python
   # economics 데이터 불러오기
   economics = pd.read_csv('economics.csv')
   
@@ -193,7 +193,7 @@ t 검정(t-test) - 두 집단의 평균 비교하기
 <br>
 
 #### 2. 유의확률 구하기
-```
+```Python
   # 상관분석
   stats.pearsonr(economics['unemploy'], economics['pce'])
 ```
@@ -214,11 +214,11 @@ t 검정(t-test) - 두 집단의 평균 비교하기
 <br>
 
 #### 1. 상관행렬 만들기
-```
+```Python
   # 상관분석
   stats.pearsonr(economics['unemploy'], economics['pce'])
 ```
-```
+```Python
   car_cor = mtcars.corr()      # 상관행렬 만들기
   car_cor = round(car_cor, 2)  # 소수점 둘째 자리까지 반올림
   car_cor
@@ -238,7 +238,7 @@ t 검정(t-test) - 두 집단의 평균 비교하기
 
 - 값의 크기를 색깔로 표현한 히트맵(heatmap)을 만들면 변수들의 관계 쉽게 파악 가능
 
-```
+```Python
   import matplotlib.pyplot as plt
   plt.rcParams.update({'figure.dpi' : '120',           # 해상도 설정
                        'figure.figsize': [7.5, 5.5]})  # 가로 세로 크기 설정
@@ -266,7 +266,7 @@ t 검정(t-test) - 두 집단의 평균 비교하기
 
 ##### (1) mask 만들기
 > 상관행렬의 행과 열의 수 만큼 0으로 채운 배열(array) 만듦
-```
+```Python
   # mask 만들기
   import numpy as np
   mask = np.zeros_like(car_cor)
@@ -276,7 +276,7 @@ t 검정(t-test) - 두 집단의 평균 비교하기
 <br>
 
 > mask 의 오른쪽 위 대각 행렬을 1로 변경
-```
+```Python
   # 오른쪽 위 대각 행렬을 1로 바꾸기
   mask[np.triu_indices_from(mask)] = 1
   mask
@@ -286,7 +286,7 @@ t 검정(t-test) - 두 집단의 평균 비교하기
 
 ##### (2) 히트맵에 mask 적용하기
 > sns.heatmap() 에 mask 적용
-```
+```Python
   # 히트맵 만들기
   sns.heatmap(data = car_cor,
               annot = True,   # 상관계수 표시
@@ -304,7 +304,7 @@ t 검정(t-test) - 두 집단의 평균 비교하기
  
 - mask 와 상관행렬의 첫 번째 행과 마지막 열을 제거해서 빈 행과 열 제거
 
-```
+```Python
   mask_new = mask[1:, :-1]         # mask 첫 번째 행, 마지막 열 제거
   cor_new = car_cor.iloc[1:, :-1]  # 상관행렬 첫 번째 행, 마지막 열 제거
   
@@ -317,7 +317,7 @@ t 검정(t-test) - 두 집단의 평균 비교하기
 <br>
 
 > 보기 좋게 수정하기
-```
+```Python
   sns.heatmap(data = cor_new,
               annot = True,               # 상관계수 표시
               cmap = 'RdBu',              # 컬러맵
