@@ -110,7 +110,7 @@
 
 - 새 노트북에서 다음 명령어 실행
 
-```
+```Python
   !pandoc report.ipynb -s -o report.docx
 ```
 
