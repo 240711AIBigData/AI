@@ -32,7 +32,7 @@
 <br>
 
 > ex
-```
+```Python
   import pandas as pd
   import numpy as np
   df = pd.DataFrame({'sex'   : ['M', 'F', np.nan, 'M', 'F'],
@@ -43,21 +43,21 @@
 <br>
 
 #### NaN 있는 상태로 연산하면 출력 결과도 NaN
-```
+```Python
   df['score'] + 1
 ```
 
 <Br>
 
 ### 결측치 확인하기
-```
+```Python
   pd.isna(df)  # 결측치 확인
 ```
 
 <br>
 
 #### 결측치 빈도 확인
-```
+```Python
   pd.isna(df).sum()  # 결측치 빈도 확인
 ```
 
@@ -65,7 +65,7 @@
 
 ### 결측치 제거하기
 #### 결측치 있는 행 제거하기
-```
+```Python
   df.dropna(subset = 'score')  # score 결측치 제거
 
   df_nomiss = df.dropna(subset = 'score')  # score 결측치 제거된 데이터 만들기
@@ -75,7 +75,7 @@
 <br>
 
 #### 여러 변수에 결측치 없는 데이터 추출하기
-```
+```Python
   df_nomiss = df.dropna(subset = ['score', 'sex'])  # score, sex 결측치 제거
   df_nomiss
 ```
@@ -88,7 +88,7 @@
 
 - 모든 변수에 결측치가 없는 행만 남김
 
-```
+```Python
   df_nomiss2 = df.dropna()  # 모든 변수에 결측치 없는 데이터 추출
   df_nomiss2
 ```
@@ -109,7 +109,7 @@
 - **groupby(), agg()** 도 결측치 제거하고 연산함
 
 > ex
-```
+```Python
   df['score'].mean()
   df['score'].sum()
   df.groupby('sex').agg(mean_score = ('score', 'mean'),
@@ -141,7 +141,7 @@
 <br>
 
 #### 평균값으로 결측치 대체하기
-```
+```Python
   exam = pd.read_csv('exam.csv')           # 데이터 불러오기
   exam.loc[[2, 7, 14], ['math']] = np.nan  # 2, 7, 14행의 math에 NaN 할당
   exam
@@ -150,14 +150,14 @@
 <br>
 
 > 평균값 구하기
-```
+```Python
   exam['math'].mean()
 ```
 
 <br>
 
 > df.fillna()로 결측치를 평균값으로 대체하기
-```
+```Python
   exam['math'] = exam['math'].fillna(55)  # math가 NaN이면 55로 대체
   exam                                    # 출력
 ```
@@ -165,7 +165,7 @@
 <br>
 
 > df.fillna()로 결측치를 평균값으로 대체하기
-```
+```Python
   exam['math'].isna().sum()  # 결측치 빈도 확인
 ```
 
