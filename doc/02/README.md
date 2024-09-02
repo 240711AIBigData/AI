@@ -28,19 +28,19 @@
 
 <br>
 
-```
+```Python
   a = 1  # a에 1 할당
   a      # a 출력
 ```
-```
+```Python
   b = 2
   b
 ```
-```
+```Python
   c = 3
   c
 ```
-```
+```Python
   d = 3.5
   d
 ```
@@ -48,44 +48,44 @@
 <br>
 
 ### 변수로 연산하기
-```
+```Python
   a + b
 ```
-```
+```Python
   a + b + c
 ```
-```
+```Python
   4 / b
 ```
-  ```
+```Python
   5 * b
 ```
 
 <br> 여러 값으로 구성된 변수 만들기
-```
+```Python
   var1 = [1, 2, 3]
   var1
 ```
-```
+```Python
   var2 = [4, 5, 6]
   var2
 ```
-```
+```Python
   var1 + var2
 ```
 
 <br>
 
 ### 문자로 된 변수 만들기
-```
+```Python
   str1 = 'a'
   str1
 ```
-```
+```Python
   str2 = 'text'
   str2
 ```
-```
+```Python
   str3 = 'Hello World!'
   str3
 ```
@@ -93,11 +93,11 @@
 <br>
 
 ### 여러 문자로 된 변수 만들기
-```
+```Python
   str4 = ['a', 'b', 'c']
   str4
 ```
-```
+```Python
   str5 = ['Hello!', 'World', 'is', 'good!']
   str5
 ```
@@ -105,17 +105,17 @@
 <br>
 
 ### 문자 변수 결합하기
-```
+```Python
   str2 + str3
 ```
-```
+```Python
   str2 + ' ' + str3
 ```
 
 <br>
 
 ### 문자로 된 변수로는 연산 불가
-```
+```Python
   str1 + 2
 ```
 
@@ -133,30 +133,30 @@
 
 ### 함수 이용하기
 > 변수 만들기
-```
+```Python
   x = [1, 2, 3]
   x
 ```
 
 > 함수 적용하기
-```
+```Python
   sum(x)
 ```
-```
+```Python
   max(x)
 ```
-```
+```Python
   min(x)
 ```
 
 <br>
 
 ### 함수의 결과물로 새 변수 만들기
-```
+```Python
   x_sum = sum(x)
   x_sum
 ```
-```
+```Python
   x_max = max(x)
   x_max
 ```
@@ -173,15 +173,15 @@
 <br>
 
 ### 1. 내장 함수
-```
+```Python
   sum(var)
-  max(var
+  max(var)
 ```
 
 <br>
 
 ### 2. 패키지 함수
-```
+```Python
   import pandas as pd
   pd.read_csv('exam.csv')
   pdDataFrame({'x' : [1, 2, 3]})
@@ -191,7 +191,7 @@
 
 ### 3. 메서드
 > 메서드(method) : 변수가 지니고 있는 함수
-```
+```Python
   df.head()
   df.info()
 ```
@@ -200,7 +200,7 @@
 
 #### 변수의 자료 구조에 따라 사용 가능한 메서드가 다름
 > 데이터 프레임
-```
+```Python
   df = pd.read_csv('exam.csv')
   df.head()
 ```
@@ -208,7 +208,7 @@
 <br>
 
 > 리스트
-```
+```Python
   var = [1, 2, 3]
   var.head()
 ```
