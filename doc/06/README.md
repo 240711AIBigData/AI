@@ -14,7 +14,7 @@
 
 ### exam 데이터 파악하기
 #### 준비하기
-```
+```Python
   import pandas as pd
   exam = pd.read_csv('exam.csv')
 ```
@@ -22,34 +22,34 @@
 <br>
 
 #### head() - 데이터 앞부분 확인하기
-```
+```Python
   exam.head()  # 앞에서부터 5행까지 출력
 ```
-```
+```Python
   exam.head(10)  # 앞에서부터 10행까지 출력
 ```
 
 <br>
 
 #### tail() - 데이터 뒷부분 확인하기
-```
+```Python
   exam.tail()  # 뒤에서부터 5행까지 출력
 ```
-```
+```Python
   exam.tail(10)  # 뒤에서부터 10행까지 출력
 ```
 
 <br>
 
 #### shape - 데이터가 몇 행, 몇 열로 구성되는지 알아보기
-```
+```Python
   exam.shape
 ```
 
 <br>
 
 #### info() - 변수 속성 파악하기
-```
+```Python
   exam.info()
 ```
 - Non-Null Count : 결측치(누락된 값)을 제외하고 구한 값의 개수
@@ -73,7 +73,7 @@
 <br>
 
 #### describe() - 요약 통계량 구하기
-```
+```Python
   exam.describe()
 ```
 
@@ -91,26 +91,26 @@
 <br>
 
 ### mpg 데이터 파악하기
-```
+```Python
   # mpg 데이터 불러오기
   mpg = pd.read_csv('mpg.csv')
 ```
-```
+```Python
   mpg.head()  # mpg 앞부분 확인
 ```
-```
+```Python
   mpg.tail()  # mpg 뒷부분 확인
 ```
-```
+```Python
   mpg.shape  #  행, 열 출력
 ```
-```
+```Python
   mpg.info()  #  데이터 속성 확인
 ```
-```
+```Python
   mpg.describe()  #  요약 통계량 출력
 ```
-```
+```Python
   mpg.describe(include = 'all')  #  문자 변수 요약 통계량 함께 출력
 ```
 
@@ -145,14 +145,14 @@
 <br>
 
 > 메서드
-```
+```Python
   df.head()
 ```
 
 <br>
 
 > 어트리뷰트
-```
+```Python
   df.shape
 ```
 
@@ -160,14 +160,14 @@
 
 #### 변수의 자료 구조에 따라 지니고 있는 어트리뷰트가 다름
 > 데이터 프레임
-```
+```Python
   df.shape
 ```
 
 <br>
 
 > 리스트
-```
+```Python
   var.shape
 ```
 
@@ -180,7 +180,7 @@
 변수명 바꾸기
 ---
 ### 1. 데이터 프레임 만들기
-```
+```Python
   df_raw = pd.DataFrame({'var1' : [1, 2, 1],
                          'var2' : [2, 3, 2]})
   df_raw
@@ -193,7 +193,7 @@
 
 - 데이터를 비교하면서 변형되는 과정 검토 가능
 
-```
+```Python
   df_new = df_raw.copy()  # 복사본 만들기
   df_new                  # 출력
 ```
@@ -201,7 +201,7 @@
 <br>
 
 ### 3. 변수명 바꾸기
-```
+```Python
   df_new = df_new.rename(columns = {'var2' : 'v2'})  # var2를 v2로 수정
   df_new
 ```
@@ -209,7 +209,7 @@
 <br>
 
 > 비교하기
-```
+```Python
   df_raw
 ```
 
@@ -237,16 +237,16 @@
 <br>
 
 ### 변수 조합해 파생변수 만들기
-```
+```Python
   df = pd.DataFrame({'var1' : [4, 3, 8],
                      'var2' : [2, 6, 1]})
   df
 ```
-```
+```Python
   df['var_sum'] = df['var1'] + df['var2']         # var_sum 파생변수 만들기
   df
 ```
-```
+```Python
   df['var_mean'] = (df['var1'] + df['var2']) / 2  # var_mean 파생변수 만들기
   df
 ```
@@ -254,7 +254,7 @@
 <br>
 
 ### mpg 통합 연비 변수 만들기
-```
+```Python
   mpg['total'] = (mpg['cty'] + mpg['hwy']) / 2  # 통합 연비 변수 만들기
   mpg.head()
 ```
@@ -262,10 +262,10 @@
 <br>
 
 #### 파생변수 분석하기
-```
+```Python
   sum(mpg['total']) / len(mpg)  # total 합계를 행 수로 나누기
 ```
-```
+```Python
   mpg['total'].mean()           # 통합 연비 변수 평균
 ```
 
@@ -273,10 +273,10 @@
 
 ### 조건문을 활용해 파생변수 만들기
 #### 1. 기준값 정하기
-```
+```Python
   mpg['total'].describe()  # 요약 통계량 출력
 ```
-```
+```Python
   mpg['total'].plot.hist()  # 그래프 만들기
 ```
 
@@ -287,7 +287,7 @@
 |-|
 |![image](https://github.com/user-attachments/assets/eff53ae5-2cb4-4cb2-a496-252051dde177)|
 
-```
+```Python
   import numpy as np
   
   # 20 이상이면 pass, 그렇지 않으면 fail 부여
@@ -298,14 +298,14 @@
 <br>
 
 #### 3. 빈도표로 합격 판정 자동차 수 살펴보기
-```
+```Python
   mpg['test'].value_counts()  # 연비 합격 빈도표 만들기
 ```
 
 <br>
 
 #### 4. 막대 그래프로 빈도 표현하기
-```
+```Python
   count_test = mpg['test'].value_counts()  # 연비 합격 빈도표를 변수에 할당
   count_test.plot.bar()                    # 연비 합격 빈도 막대 그래프 만들기
 ```
@@ -313,7 +313,7 @@
 <br>
 
 > 축 이름 회전하기
-```
+```Python
   count_test.plot.bar(rot = 0)  # 축 이름 수평으로 만들기
 ```
 
@@ -327,7 +327,7 @@
 |C|20 미만|
 
 #### 1. 연비 등급 변수 만들기
-```
+```Python
   # total 기준으로 A, B, C 등급 부여
   mpg['grade'] = np.where(mpg['total'] >= 30, 'A',
                  np.where(mpg['total'] >= 20, 'B', 'C'))
@@ -339,30 +339,30 @@
 <br>
 
 #### 2. 빈도표와 막대 그래프로 연비 등급 살펴보기
-```
+```Python
   count_grade = mpg['grade'].value_counts()  # 등급 빈도표 만들기
   count_grade
 ```
-```
+```Python
   count_grade.plot.bar(rot = 0)              # 등급 빈도 막대 그래프 만들기
 ```
 
 <br>
 
 ##### 알파벳순으로 막대 정렬하기
-```
+```Python
   # 등급 빈도표 알파벳순 정렬
   count_grade = mpg['grade'].value_counts().sort_index()
   count_grade
 ```
-```
+```Python
   count_grade.plot.bar(rot = 0)
 ```
 
 <br>
 
 #### 3. 필요한 만큼 범주 만들기 : '범주의 수 - 1'
-```
+```Python
   # A, B, C, D 등급 변수 만들기
   mpg['grade2'] = np.where(mpg['total'] >= 30, 'A',
                   np.where(mpg['total'] >= 25, 'B',
@@ -378,7 +378,7 @@
  
   -  [Shift] + [\] 로 입력
  
-```
+```Python
   mpg['size'] = np.where((mpg['category'] == 'compact') |
                          (mpg['category'] == 'subcompact') |
                          (mpg['category'] == '2seater'),
@@ -391,7 +391,7 @@
 <br>
 
 #### df.isin() 사용하기
-```
+```Python
   mpg['size'] = np.where(mpg['category'].isin(['compact', 'subcompact',
   '2seater']), 'small', 'large')
   
