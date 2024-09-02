@@ -27,24 +27,24 @@
 <br>
 
 #### 데이터 불러오기
-```
+```Python
   import pandas as pd
   exam = pd.read_csv('exam.csv')
   exam
 ```
-```
+```Python
   # exam에서 nclass가 1인 경우만 추출
   exam.query('nclass == 1')
 ```
-```
+```Python
   # 2반인 경우만 추출
   exam.query('nclass == 2')
 ```
-```
+```Python
   # 1반이 아닌 경우
   exam.query('nclass != 1')
 ```
-```
+```Python
   # 3반이 아닌 경우
   exam.query('nclass != 3')
 ```
@@ -52,19 +52,19 @@
 <br>
 
 ### 초과, 미만, 이상, 이하 조건 걸기
-```
+```Python
   # 수학 점수가 50점을 초과한 경우
   exam.query('math > 50')
 ```
-```
+```Python
   # 수학 점수가 50점 미만인 경우
   exam.query('math < 50')
 ```
-```
+```Python
   # 영어 점수가 50점 이상인 경우
   exam.query('english >= 50')
 ```
-```
+```Python
   # 영어 점수가 80점 이하인 경우
   exam.query('english <= 80')
 ```
@@ -72,11 +72,11 @@
 <br>
 
 ### 여러 조건을 충족하는 행 추출하기
-```
+```Python
   # 1반이면서 수학 점수가 50점 이상인 경우
   exam.query('nclass == 1 & math >= 50')
 ```
-```
+```Python
   # 2반이면서 영어 점수가 80점 이상인 경우
   exam.query('nclass == 2 & english >= 80')
 ```
@@ -84,11 +84,11 @@
 <br>
 
 ### 여러 조건 중 하나 이상 충족하는 행 추출하기
-```
+```Python
   # 수학 점수가 90점 이상이거나 영어 점수가 90점 이상인 경우
   exam.query('math >= 90 | english >= 90')
 ```
-```
+```Python
   # 영어 점수가 90점 미만이거나 과학 점수가 50점 미만인 경우
   exam.query('english < 90 | science < 50')
 ```
@@ -96,11 +96,11 @@
 <br>
 
 ### 목록에 해당하는 행 추출하기
-```
+```Python
   # 1, 3, 5반에 해당하면 추출
   exam.query('nclass == 1 | nclass == 3 | nclass == 5')
 ```
-```
+```Python
   # 1, 3, 5반에 해당하면 추출
   exam.query('nclass in [1, 3, 5]')
 ```
@@ -108,17 +108,17 @@
 <br>
 
 ### 추출한 행으로 데이터 만들기
-```
+```Python
   # nclass가 1인 행 추출해 nclass1에 할당
   nclass1 = exam.query('nclass == 1')
   
   # nclass가 2인 행 추출해 nclass2에 할당
   nclass2 = exam.query('nclass == 2')
 ```
-```
+```Python
   nclass1['math'].mean()  # 1반 수학 점수 평균 구하기
 ```
-```
+```Python
   nclass2['math'].mean()  # 2반 수학 점수 평균 구하기
 ```
 
@@ -126,16 +126,16 @@
 
 ### 문자 변수를 이용해 조건에 맞는 행 추출하기
 > \'전체 조건'과 '추출할 문자'에 서로 다른 모양 따옴표 입력
-```
+```Python
   df = pd.DataFrame({'sex'     : ['F', 'M', 'F', 'M'],
                      'country' : ['Korea', 'China', 'Japan', 'USA']})
   df
 ```
-```
+```Python
   # 전체 조건에 작은따옴표, 추출할 문자에 큰따옴표 사용
   df.query('sex == "F" & country == "Korea"')
 ```
-```
+```Python
   # 전체 조건에 큰따옴표, 추출할 문자에 작은따옴표 사용
   df.query("sex == 'M' & country == 'China'")
 ```
@@ -143,7 +143,7 @@
 <br>
 
 #### 💡 같은 모양 따옴표 사용하면 에러
-```
+```Python
 # 전체 조건과 추출할 문자에 모두 작은따옴표 사용
 df.query('sex == 'F' & country == 'Korea'')
 ```
@@ -171,7 +171,7 @@ df.query('sex == 'F' & country == 'Korea'')
 
 #### 💡 외부 변수를 이용해 추출하기
 > 별도의 변수를 이용해 행을 추출하려면 변수명 앞에 @를 붙여서 조건 입력
-```
+```Python
   var = 3
   exam.query('nclass == @var')
 ```
@@ -186,7 +186,7 @@ df.query('sex == 'F' & country == 'Korea'')
 <br>
 
 - 행, 열 제한 없이 모두 출력하기
-```
+```Python
   pd.set_option('display.max_rows', None)    # 모든 행 출력하도록 설정
   pd.set_option('display.max_columns' None)  # 모든 열 출력하도록 설정
 ```
@@ -196,7 +196,7 @@ df.query('sex == 'F' & country == 'Korea'')
 <br>
 
 - 새로 실행하지 않고 설정 되돌리기
-```
+```Python
   pd.reset_option('display.max_rows')     # 행 출력 제한 되돌리기
   pd.reset_option('display.max_columns')  # 열 출력 제한 되돌리기
   pd.reset_option('all')                  # 모든 설정 되돌리기
