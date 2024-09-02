@@ -18,7 +18,7 @@
 <br>
 
 > 이상치가 들어있는 데이터 만들기
-```
+```Python
   df = pd.DataFrame({'sex'   : [1, 2, 1, 3, 2, 1],
                      'score' : [5, 4, 3, 4, 2, 6]})
   df
@@ -28,10 +28,10 @@
 
 ### 이상치 확인하기
 > 빈도표를 만들어 존재할 수 없는 값이 있는지 확인
-```
+```Python
   df['sex'].value_counts(sort = False).sort_index()
 ```
-```
+```Python
   df['score'].value_counts(sort = False).sort_index()
 ```
 
@@ -40,12 +40,12 @@
 ### 결측 처리하기
 
 > 이상치일 경우 NaN 부여
-```
+```Python
   # sex가 3이면 NaN 부여
   df['sex'] = np.where(df['sex'] == 3, np.nan, df['sex'])
   df
 ```
-```
+```Python
   # score가 5보다 크면 NaN 부여
   df['score'] = np.where(df['score'] > 5, np.nan, df['score'])
   df
@@ -54,7 +54,7 @@
 <br>
 
 > 결측치 제거 후 분석
-```
+```Python
   df.dropna(subset = ['sex', 'score']) \        # sex, score 결측치 제거
          .groupby('sex') \                      # sex 별 분리
          .agg(mean_score = ('score', 'mean'))   # score 평균 구하기
@@ -69,7 +69,7 @@
 
 <br>
 
-```
+```Python
   df = pd.DataFrame({'x1' : [1, 1, 2, 2]})
   df['x2'] = np.where(df['x1'] == 1, 'a', np.nan)  # 조건에 맞으면 문자 부여
   print(df)
@@ -80,7 +80,7 @@
 
 ##### 변수를 문자와 NaN으로 함께 구성하는 방법
 > 1. 결측치로 만들 값에 문자 부여
-```
+```Python
   # 결측치로 만들 값에 문자 부여
   df['x2'] = np.where(df['x1'] == 1, 'a', 'etc')
 ```
@@ -88,7 +88,7 @@
 <br>
 
 > 2. df.replace() 를 이용해 결측치로 만들 문자를 np.nan 으로 바꾸기
-```
+```Python
   # 'etc'를 NaN으로 바꾸기
   df['x2'] = df['x2'].replace('etc', np.nan)
   print(df)
@@ -140,7 +140,7 @@
 <br>
 
 ### 1. 상자 그림 살펴 보기
-```
+```Python
   mpg = pd.read_csv('mpg.csv')
   
   import seaborn as sns
@@ -177,11 +177,11 @@
 
 ### 2. 극단치 기준값 구하기
 > (1) 1사분위수, 3사분위수 구하기
-```
+```Python
   pct25 = mpg['hwy'].quantile(.25)
   pct25
 ```
-```
+```Python
   pct75 = mpg['hwy'].quantile(.75)
   pct75
 ```
@@ -189,7 +189,7 @@
 <br>
 
 > (2) IQR 구하기
-```
+```Python
   iqr = pct75 - pct25
   iqr
 ```
@@ -197,17 +197,17 @@
 <br>
 
 > (3) 하한, 상한 구하기
-```
+```Python
   pct25 - 1.5 * iqr  # 하한
 ```
-```
+```Python
   pct75 + 1.5 * iqr  # 상한
 ```
 
 <br>
 
 ### 3. 극단치를 결측 처리하기
-```
+```Python
   # 4.5 ~ 40.5 벗어나면 NaN 부여
   mpg['hwy'] = np.where((mpg['hwy'] < 4.5) | (mpg['hwy'] > 40.5), np.nan, mpg['hwy'])
   
@@ -218,7 +218,7 @@
 <br>
 
 ### 4. 결측치 제거하고 분석하기
-```
+```Python
   mpg.dropna(subset = ['hwy']) \        # hwy 결측치 제거
      .groupby('drv') \                  # drv 별 분리
      .agg(mean_hwy = ('hwy', 'mean'))   # hwy 평균 구하기
@@ -229,7 +229,7 @@
 정리하기
 ---
 ### 1. 결측치 정제하기
-```
+```Python
   pd.isna(df).sum()                                 # 결측치 확인
   df_nomiss = df.dropna(subset = 'score' )          # 결측치 제거
   df_nomiss = df.dropna(subset = ['score', 'sex'])  # 여러 변수 동시에 결측치 제거
@@ -238,7 +238,7 @@
 <br>
 
 ### 2. 이상치 정제하기
-```
+```Python
   # 이상치 확인
   df['sex'].value_counts(sort = False)
   
