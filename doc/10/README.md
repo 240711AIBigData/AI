@@ -8,7 +8,7 @@ df[] : 변수 추출하기
 <br>
 
 > 변수 추출하기
-```
+```Python
   exam['math']  # math 추출
 
   exam['english']  # english 추출
@@ -17,7 +17,7 @@ df[] : 변수 추출하기
 <br>
 
 > 여러 변수 추출하기
-```
+```Python
   exam[['nclass', 'math', 'english']]  # nclass, math, english 추출
 ```
 
@@ -27,12 +27,12 @@ df[] : 변수 추출하기
 - 변수명을 []로 한번 더 감싸기
 
 > 시리즈로 추출
-```
+```Python
   exam['math']
 ```
 
 > 데이터 프레임으로 추출
-```
+```Python
   exam[['math']]
 ```
 
@@ -40,7 +40,7 @@ df[] : 변수 추출하기
 
 ### 변수 제거하기
 > 변수 제거하기
-```
+```Python
   exam.drop(columns = 'math')  # math 제거
 
   exam.drop(columns = ['math', 'english'])  # math, english 제거
@@ -51,7 +51,7 @@ df[] : 변수 추출하기
 ### pandas 함수 조합하기
 #### query()와 [] 조합하기
 > 1반 학생의 영어 점수 추출
-```
+```Python
   # nclass가 1인 행만 추출한 다음 english 추출
   exam.query('nclass == 1')['english']
 ```
@@ -59,7 +59,7 @@ df[] : 변수 추출하기
 <br>
 
 > 수학 점수가 50점 이상인 학생의 id와 math 변수 추출
-```
+```Python
   # math가 50 이상인 행만 추출한 다음, id와 math 추출
   exam.query('math >= 50')[['id', 'math']]
 ```
@@ -67,7 +67,7 @@ df[] : 변수 추출하기
 <br>
 
 > 일부만 출력하기
-```
+```Python
   # math가 50 이상인 행만 추출한 다음, id와 math 앞부분 5행까지 추출
   exam.query('math >= 50')[['id', 'math']].head()
 
@@ -87,7 +87,7 @@ df[] : 변수 추출하기
 <br>
 
 > 실제 코드에서는 \ 뒤에 주석 달기 불가
-```
+```Python
   exam.query('math >= 50')\  # math 가 50 이상인 행만 추출
       [['id', 'math']]\      # id, math 추출
       .head()                # 앞부분 10행 추출
@@ -106,21 +106,21 @@ df[] : 변수 추출하기
 <br>
 
 ### 오름차순으로 정렬하기
-```
+```Python
   exam.sort_values('math')  # math 오름차순 정렬
 ```
 
 <br>
 
 ### 내림차순으로 정렬하기
-```
+```Python
   exam.sort_values('math', ascending = False)  # math 내림차순 정렬
 ```
 
 <br>
 
 ### 여러 정렬 기준 적용하기
-```
+```Python
   # nclass, math 오름차순 정렬
   exam.sort_values(['nclass', 'math'])
 ```
@@ -128,7 +128,7 @@ df[] : 변수 추출하기
 <br>
 
 > 변수별로 정렬 순서를 다르게 지정하기
-```
+```Python
   # nclass 오름차순, math 내림차순 정렬
   exam.sort_values(['nclass', 'math'], ascending = [True, False])
 ```
@@ -150,7 +150,7 @@ df[] : 변수 추출하기
 <br>
 
 > 파생변수 추가
-```
+```Python
   # total 변수 추가
   exam.assign(total = exam['math'] + exam['english'] + exam['science'])
 ```
@@ -158,7 +158,7 @@ df[] : 변수 추출하기
 <br>
 
 > 여러 파생변수 한번에 추가하기
-```
+```Python
   exam.assign(
   total = exam['math'] + exam['english'] + exam['science'],        # total 추가
   mean = (exma['math'] + exam['english'] + exam['science'] / 3)    # mean 추가
@@ -167,7 +167,7 @@ df[] : 변수 추출하기
 <br>
 
 ### df.assign()에 np.where() 적용하기
-```
+```Python
   import numpy as np
   exam.assign(test = np.where(exam['science'] >= 60, 'pass', 'fall'))
 ```
@@ -175,7 +175,7 @@ df[] : 변수 추출하기
 <br>
 
 ### 추가한 변수를 pandas 함수에 바로 활용하기
-```
+```Python
   # total 변수 추가, total 기준 정렬
   exam.assign(total = exam['math'] + exam['english'] + exam['science'])\
       .sort_values('total)
@@ -184,7 +184,7 @@ df[] : 변수 추출하기
 <br>
 
 ### lambda 이용해 데이터 프레임명 줄여쓰기
-```
+```Python
   # 긴 데이터 프레임명 지정
   long_name = pd.read_csv('./input/exam.scv')
 
@@ -198,7 +198,7 @@ df[] : 변수 추출하기
 <br>
 
 ### 앞에서 만든 변수를 활용해 다시 변수 만들기
-```
+```Python
   # 반드시 lambda 를 이용해 데이터 프레임명을 약어로 입력
   exam.assign(total = exam['math'] + exam['english'] + exam['science'],
               mean = lambda x: x['total'] / 3)
@@ -208,7 +208,7 @@ df[] : 변수 추출하기
 <br>
 
 - 파생 변수를 만드는 행에 lambda를 각각 입력하면 데이터 프레임명 통일하여 가독성 증가
-```
+```Python
   exam.assign(total = lambda x: x['math'] + x['english'] + x['science'],
               mean = lambda x: x['total'] / 3
 ```
@@ -216,12 +216,12 @@ df[] : 변수 추출하기
 <br>
 
 #### ✨ lambda 이용하지 않고 데이터 프레임명 직접 입력하면 에러
-```
+```Python
   exam.assign(total = exam['math'] + exam['english'] + exam['science'],
               mean = exam['total'] / 3)
 ```
 > 실행결과
-```
+```Python
   KeyError: 'total'
 ```
 
@@ -237,7 +237,7 @@ df[] : 변수 추출하기
 <br>
 
 > 전체 요약 통계량 구하기
-```
+```Python
   # math 평균 구하기
   exam.agg(mean_math = ('math', 'mean'))
 ```
@@ -246,7 +246,7 @@ df[] : 변수 추출하기
 <br>
 
 > 집단별 요약 통계량 구하기
-```
+```Python
   exam.groupby('nclass')\                  # nclass 별로 분리하기
       .agg(mean_math = ('math', 'mean'))   # math 평균 구하기
 ```
@@ -263,7 +263,7 @@ df[] : 변수 추출하기
   - 인덱스(index) : 값이 데이터 프레임의 어디에 있는지 '값의 위치를 나타낸 값'
 
 > ex
-```
+```Python
   exam.groupby('nclass', as_index = False)\
       .agg(mean_math = ('math', 'mean'))
 ```
@@ -271,7 +271,7 @@ df[] : 변수 추출하기
 <br>
 
 > 여러 요약 통계량 한 번에 구하기
-```
+```Python
   exam.groupby('nclass')\                      # nclass 별로 분리
       .agg(mean_math = ('math', 'mean'),       # 수학 점수 평균
            sum_math = ('math', 'sum'),         # 수학 점수 합계
@@ -297,7 +297,7 @@ df[] : 변수 추출하기
 #### 📌 모든 변수의 요약 통계량 한 번에 구하기
 - df.groupby() 에 agg() 대신 mean(), sum() 과 같은 요약 통계량 함수 적용
 
-```
+```Python
   exam.groupby('nclass').mean()
 ```
 
@@ -306,7 +306,7 @@ df[] : 변수 추출하기
 
 ### 집단별로 다시 집단 나누기
 > 집단을 나눈 다음 다시 하위 집단으로 나누기
-```
+```Python
   mpg.groupby(['manufacturer', 'drv'])\   # 제조 회사 및 구동 방식별 분리
      .agg(mean_cty = ('cty', 'mean))      # cty 평균 구하기
 ```
@@ -314,7 +314,7 @@ df[] : 변수 추출하기
 <br>
 
 #### 📌 value_countes() 로 집단별 빈도 간단하게 구하기
-```
+```Python
   mpg.groupby('drv')\
      .agg(n = ('drv', 'count'))
 
@@ -326,12 +326,12 @@ df[] : 변수 추출하기
 <br>
 
 > ex
-```
+```Python
   mpg['drv'].value_counts().query('n > 100')
 ```
 
 > 실행결과
-```
+```Python
   'Series' object has no attribute 'query'
 ```
 
@@ -352,7 +352,7 @@ df[] : 변수 추출하기
 <br>
 
 > 코드
-```
+```Python
   mpg.query('category == "suv"') \                        # suv 추출
      .assign(total = (mpg['hwy'] + mpg['cty']) / 2) \     # 합산 연비 변수 만들기
      .groupby('manufacturer') \                           # 제조 회사별로 분리
@@ -391,7 +391,7 @@ df.concat() : 세로로 합치기
 
 - on: 데이터를 합칠 때 기준으로 삼을 변수명 입력
 
-```
+```Python
   # 중간고사 데이터 만들기
   test1 = pd.DataFrame({'id'      : [1, 2, 3, 4, 5],
                         'midterm' : [60, 80, 70, 90, 85]})
@@ -408,7 +408,7 @@ df.concat() : 세로로 합치기
 <br>
 
 > 다른 데이터를 활용해 변수 추가하기
-```
+```Python
   name = pd.DataFrame({'nclass'  : [1, 2, 3, 4, 5],
                        'teacher' : ['kim', 'lee', 'park', 'choi', 'jung']})
 
@@ -424,7 +424,7 @@ df.concat() : 세로로 합치기
   
 - 인덱스 중복 안되도록 새로 부여하려면 pd.concat()에 ignore_index = True
 
-```
+```Python
   # 학생 1~5번 시험 데이터 만들기
   group_a = pd.DataFrame({'id'   : [1, 2, 3, 4, 5],
                           'test' : [60, 80, 70, 90, 85]})
@@ -458,7 +458,7 @@ df.concat() : 세로로 합치기
 정리
 ---
 ## 1. 조건에 맞는 데이터만 추출하기
-```
+```Python
   exam.query('english <= 80')
   exam.query('nclass == 1 & math >= 50')    # 여러 조건 동시 충족
   exam.query('math >= 90 | english >= 90')  # 여러 조건 중 하나 이상 충족
@@ -468,7 +468,7 @@ df.concat() : 세로로 합치기
 <br>
 
 ## 2. 필요한 변수만 추출하기
-```
+```Python
   exam['math']                              # 한 변수 추출
   exam[['nclass', 'math', 'english']]       # 여러 변수 추출
   exam.drop(columns = 'math')               # 변수 제거
@@ -478,14 +478,14 @@ df.concat() : 세로로 합치기
 <br>
 
 ## 3. pandas 명령어 조합하기
-```
+```Python
   exam.query('math >= 50')[['id', 'math']].head()
 ```
 
 <br>
 
 ## 4. 순서대로 정렬하기
-```
+```Python
   exam.sort_values('math')                     # 오름차순 정렬
   exam.sort_values('math', ascending = False)  # 내림차순 정렬
   
@@ -497,7 +497,7 @@ df.concat() : 세로로 합치기
 <br>
 
 ## 5. 파생변수 추가하기
-```
+```Python
   exam.assign(total = exam['math'] + exam['english'] + exam['science'])
   
   # 여러 파생변수 한 번에 추가하기
@@ -516,7 +516,7 @@ df.concat() : 세로로 합치기
 <br>
 
 ## 6. 집단별로 요약하기
-```
+```Python
   exam.groupby('nclass') \
       .agg(mean_math = ('math', 'mean'))
   
@@ -528,7 +528,7 @@ df.concat() : 세로로 합치기
 <br>
 
 ## 7. 데이터 합치기
-```
+```Python
   pd.merge(test1, test2, how = 'left', on = 'id')  # 가로로 합치기
   pd.concat([group_a, group_b])                    # 세로로 합치기
 ```
