@@ -188,7 +188,7 @@ df.query('sex == 'F' & country == 'Korea'')
 - 행, 열 제한 없이 모두 출력하기
 ```Python
   pd.set_option('display.max_rows', None)    # 모든 행 출력하도록 설정
-  pd.set_option('display.max_columns' None)  # 모든 열 출력하도록 설정
+  pd.set_option('display.max_columns', None)  # 모든 열 출력하도록 설정
 ```
 - JupyterLab 이나 커널(Kernel)을 새로 실행하면 원래대로 돌아감
   - 커널 새로 실행 : JupyterLab 상단 메뉴 [Kernel → Restart Kernel...] 클릭
