@@ -27,15 +27,15 @@
 
 - geometry : 시군구의 경계를 나타낸 위도, 경도 좌표
 
-```
+```Python
   import json
   geo = json.load(open('SIG.geojson', encoding = 'UTF-8'))
 ```
-```
+```Python
   # 행정 구역 코드 출력 
   geo['features'][0]['properties']
 ```
-```
+```Python
 # 위도, 경도 좌표 출력
 geo['features'][0]['geometry']
 ```
@@ -49,12 +49,12 @@ geo['features'][0]['geometry']
  
 - 2021년의 시군구별 행정 구역 코드, 지역 이름, 인구를 담고 있음
 
-```
+```Python
   import pandas as pd
   df_pop = pd.read_csv('Population_SIG.csv')
   df_pop.head()
 ```
-```
+```Python
   df_pop.info()
 ```
 
@@ -66,7 +66,7 @@ geo['features'][0]['geometry']
 
 - 문자 타입으로 되어 있어야 지도를 만드는데 활용 가능
 
-```
+```Python
   df_pop['code'] = df_pop['code'].astype(str)
 ```
 
@@ -79,7 +79,7 @@ geo['features'][0]['geometry']
 
 - 아나콘다 프롬프트에서 folium 패키지 설치하기
 
-```
+```Python
   pip install folium
 ```
 
@@ -92,7 +92,7 @@ geo['features'][0]['geometry']
  
   - zoom_start : 지도를 확대할 정도 입력
 
-```
+```Python
   import folium
   folium.Map(location = [35.95, 127.7],  # 지도 중심 좌표
              zoom_start = 8)             # 확대 단계
@@ -101,7 +101,7 @@ geo['features'][0]['geometry']
 <br>
 
 > 배경 지도 만들어 저장하기
-```
+```Python
   map_sig = folium.Map(location = [35.95, 127.7],  # 지도 중심 좌표
                        zoom_start = 8,             # 확대 단계
                        tiles = 'cartodbpositron')  # 지도 종류
@@ -121,7 +121,7 @@ geo['features'][0]['geometry']
  
   - key_on : 지도 데이터의 행정 구역 코드
 
-```
+```Python
   # 지도 데이터
   # 통계 데이터
   # df_pop 행정 구역 코드, 인구
@@ -152,7 +152,7 @@ geo['features'][0]['geometry']
 
   - 지역을 인구에 따라 다섯 단계 색깔로 표현
 
-```
+```Python
   bins = list(df_pop['pop'].quantile([0, 0.2, 0.4, 0.6, 0.8, 1]))
   bins
 ```
@@ -160,7 +160,7 @@ geo['features'][0]['geometry']
 <br>
 
 ##### (4) 디자인 수정하기
-```
+```Python
   ## 배경 지도 만들기
   
   # 지도 중심 좌표
@@ -170,7 +170,7 @@ geo['features'][0]['geometry']
                        zoom_start = 8,
                        tiles = 'cartodbpositron')
 ```
-```
+```Python
   ## 단계 구분도 만들기
   # 지도 데이터
   # 통계 데이터
@@ -211,15 +211,15 @@ geo['features'][0]['geometry']
 
 - geometry : 동별 경계를 나타낸 위도, 경도 좌표
 
-```
+```Python
   import json
   geo_seoul = json.load(open('EMD_Seoul.geojson', encoding = 'UTF-8'))
 ```
-```
+```Python
   # 행정 구역 코드 출력
   geo_seoul['features'][0]['properties']
 ```
-```
+```Python
   # 위도, 경도 좌표 출력
   geo_seoul['features'][0]['geometry']
 ```
@@ -231,18 +231,18 @@ geo['features'][0]['geometry']
 
   - 2021년 서울시 동별 행정 구역 코드, 동 이름, 외국인 인구 담고 있음
 
-```
+```Python
   foreigner = pd.read_csv('Foreigner_EMD_Seoul.csv')
   foreigner.head()
 ```
-```
+```Python
   foreigner.info()
 ```
 
 <br>
 
 > code 를 문자 타입으로 바꾸기
-```
+```Python
   foreigner['code'] = foreigner['code'].astype(str)
 ```
 
@@ -252,11 +252,11 @@ geo['features'][0]['geometry']
 ##### 계급 구간 정하기
 - 지역을 8단계로 나누도록 8개 계급 구간의 하한값, 상한값 만들기
 
-```
+```Python
   bins = list(foreigner['pop'].quantile([0, 0.2, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]))
   bins
 ```
-```
+```Python
   ## 배경 지도 만들기
   
   # 서울 좌표
@@ -266,7 +266,7 @@ geo['features'][0]['geometry']
                          zoom_start = 12,
                          tiles = 'cartodbpositron')
 ```
-```
+```Python
   ## 단계구분도 만들기
   # 지도 데이터
   # 통계 데이터
@@ -302,10 +302,10 @@ geo['features'][0]['geometry']
 
 - .add_to(map_seoul_gu) 를 이용해 앞에서 만든 지도에 추가
  
-```
+```Python
   geo_seoul_sig = json.load(open('SIG_Seoul.geojson', encoding = 'UTF-8'))
 ```
-```
+```Python
   ## 서울 구 라인 추가
   
   # 지도 데이터
@@ -324,14 +324,14 @@ geo['features'][0]['geometry']
 
 ##### 💡 folium 활용하기
 > HTML 파일로 저장하기
-```
+```Python
   map_seoul.save('map_seoul.html')
 ```
 
 <br>
 
 > 웹 브라우저에서 html 파일 열기
-```
+```Python
   import webbrowser
   webbrowser.open_new('map_seoul.html')
 ```
