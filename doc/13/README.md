@@ -49,11 +49,11 @@
 <br>
 
 ### 산점도 만들기
-```
+```Python
   import pandas as pd
   mpg = pd.read_csv('mpg.csv')
 ```
-```
+```Python
   # x축은 displ, y축은 hwy를 나타낸 산점도 만들기
   import seaborn as sns
   sns.scatterplot(data = mpg, x = 'displ', y = 'hwy')
@@ -62,12 +62,12 @@
 <br>
 
 #### 축 범위 설정하기
-```
+```Python
   # x축 범위 3~6으로 제한
   sns.scatterplot(data = mpg, x = 'displ', y = 'hwy') \
      .set(xlim = [3, 6])
 ```
-```
+```Python
   # x축 범위 3~6, y축 범위 10~30으로 제한
   sns.scatterplot(data = mpg, x = 'displ', y = 'hwy') \
      .set(xlim = [3, 6], ylim = [10, 30])
@@ -76,7 +76,7 @@
 <br>
 
 #### 종류별로 표식 색깔 바꾸기
-```
+```Python
   # drv별로 표식 색깔 다르게 표현
   sns.scatterplot(data = mpg, x = 'displ', y = 'hwy', hue = 'drv')
 ```
@@ -85,7 +85,7 @@
 
 #### 💡 그래프 활용하기
 > 그래프 설정 바꾸기
-```
+```Python
   import matplotlib.pyplot as plt
   plt.rcParams.update({'figure.dpi' : '150'})             # 해상도, 기본값 72
   plt.rcParams.update({'figure.figsize' : [8, 6]})        # 그림 크기, 기본값 [6, 4]
@@ -105,7 +105,7 @@
 <br>
 
 > 설명 메시지 숨기기 - 코드 뒤에 ; 삽입
-```
+```Python
   sns.scatterplot(data = mpg, x = 'displ', y = 'hwy');
 ```
 
@@ -130,7 +130,7 @@
 
 ### 평균 막대 그래프 만들기
 #### 1. 집단별 평균표 만들기
-```
+```Python
   df_mpg = mpg.groupby('drv') \
               .agg(mean_hwy = ('hwy', 'mean'))
   df_mpg
@@ -145,7 +145,7 @@
 
 - seaborn 으로 그래프를 만들려면 값이 변수에 담겨있어야 함
 
-```
+```Python
   df_mpg = mpg.groupby('drv', as_index = False) \
               .agg(mean_hwy = ('hwy', 'mean'))
   df_mpg
@@ -154,14 +154,14 @@
 <br>
 
 #### 2. 그래프 만들기
-```
+```Python
   sns.barplot(data = df_mpg, x = 'drv', y = 'mean_hwy')
 ```
 
 <br>
 
 #### 3. 크기순으로 정렬하기
-```
+```Python
   # 데이터 프레임 정렬하기
   df_mpg = df_mpg.sort_values('mean_hwy', ascending = False)
   
@@ -179,7 +179,7 @@
 <br>
 
 #### 1. 집단별 빈도표 만들기
-```
+```Python
   # 집단별 빈도표 만들기
   df_mpg = mpg.groupby('drv', as_index = False) \
               .agg(n = ('drv', 'count'))
@@ -190,7 +190,7 @@
 <br>
 
 #### 2. 그래프 만들기
-```
+```Python
   # 막대 그래프 만들기
   sns.barplot(data = df_mpg, x = 'drv', y = 'n')
 ```
@@ -200,7 +200,7 @@
 ### sns.countplot() 으로 빈도 막대 그래프 만들기
 - 집단별 빈도표 만드는 작업 생략하고 원자료를 이용해 곧바로 빈도 막대 그래프 만듦
 
-```
+```Python
   # 빈도 막대 그래프 만들기
   sns.countplot(data = mpg, x = 'drv')
 ```
@@ -214,7 +214,7 @@
  
   - mpg의 0~6행 f, 7~17행 4, 18~27행 r
 
-```
+```Python
   mpg['drv'].unique()
 ```
 
@@ -222,14 +222,14 @@
 
   - groupby()로 데이터 프레임을 요약하면 값의 순서가 알파벳순으로 바뀜
 
-```
+```Python
   df_mpg['drv'].unique()
 ```
 
 <br>
 
 ### 막대 정렬하기
-```
+```Python
   # 4, f, r 순으로 막대 정렬
   sns.countplot(data = mpg, x = 'drv', order = ['4', 'f', 'r'])
 ```
@@ -237,11 +237,11 @@
 <br>
 
 > 빈도 높은 순으로 정렬하기
-```
+```Python
   # drv의 값을 빈도가 높은 순으로 출력
   mpg['drv'].value_counts().index
 ```
-```
+```Python
   # drv 빈도 높은 순으로 막대 정렬
   sns.countplot(data = mpg, x = 'drv', order = mpg['drv'].value_counts().index)
 ```
@@ -278,12 +278,12 @@
 <br>
 
 ### 시계열 그래프 만들기
-```
+```Python
   # economics 데이터 불러오기
   economics = pd.read_csv('economics.csv')
   economics.head()
 ```
-```
+```Python
 sns.lineplot(data = economics, x = 'date', y = 'unemploy')
 ```
 - x축에 굵은 선이 표시되어 있음
@@ -294,33 +294,33 @@ sns.lineplot(data = economics, x = 'date', y = 'unemploy')
 
 ### x축에 연도 표시하기
 #### 1. 날짜 시간 타입 변수 만들기
-```
+```Python
   # 날짜 시간 타입 변수 만들기
   economics['date2'] = pd.to_datetime(economics['date'])
   
   # 변수 타입 확인
   economics.info()
 ```
-```
+```Python
   economics[['date', 'date2']]
 ```
-```
+```Python
   # 연 추출
   economics['date2'].dt.year
 ```
-```
+```Python
   # 월 추출
   economics['date2'].dt.month
 ```
-```
-# 일 추출
-economics['date2'].dt.day
+```Python
+  # 일 추출
+  economics['date2'].dt.day
 ```
 
 <br>
 
 #### 2. 연도 변수 만들기
-```
+```Python
   # 연도 변수 추가
   economics['year'] = economics['date2'].dt.year
   economics.head()
@@ -329,11 +329,11 @@ economics['date2'].dt.day
 <br>
 
 #### 3. x축에 연도 표시하기
-```
+```Python
   # x축에 연도 표시
   sns.lineplot(data = economics, x = 'year', y = 'unemploy')
 ```
-```
+```Python
   # 신뢰구간 제거
   sns.lineplot(data = economics, x = 'year', y = 'unemploy', errorbar = None)
 ```
@@ -362,7 +362,7 @@ economics['date2'].dt.day
 <br>
 
 ### 상자 그림 만들기
-```
+```Python
   sns.boxplot(data = mpg, x = 'drv', y = 'hwy')
 ```
 
@@ -447,7 +447,7 @@ economics['date2'].dt.day
 <br>
 
 ### 1. 산점도
-```
+```Python
 sns.scatterplot(data = mpg, x = 'displ', y = 'hwy')
 
 # 축 제한
@@ -463,7 +463,7 @@ sns.scatterplot(data = mpg, x = 'displ', y = 'hwy', hue = 'drv')
 ### 2. 막대 그래프
 
 #### 평균 막대 그래프
-```
+```Python
 # 1단계. 평균표 만들기
 df_mpg = mpg.groupby('drv', as_index = False) \
             .agg(mean_hwy = ('hwy', 'mean'))
@@ -475,21 +475,21 @@ sns.barplot(data = df_mpg, x = 'drv', y = 'mean_hwy')
 <br>
 
 #### 빈도 막대 그래프
-```
+```Python
 sns.countplot(data = mpg, x = 'drv')
 ```
 
 <br>
 
 ### 3. 선 그래프
-```
+```Python
 sns.lineplot(data = economics, x = 'date', y = 'unemploy')
 ```
 
 <br>
 
 ### 4. 상자 그림
-```
+```Python
 sns.boxplot(data = mpg, x = 'drv', y = 'hwy')
 ```
 
